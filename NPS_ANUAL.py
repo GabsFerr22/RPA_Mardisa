@@ -14,9 +14,10 @@ import urllib
 def executar_script():
     try:
         # Configurar o serviço do WebDriver manualmente
-        chrome_driver_path = r'C:\Users\adm.luiz.vinicius\Downloads\chromedriver.exe'
-        servico = Service(chrome_driver_path)
-        navegador = webdriver.Chrome(service=servico)
+        options = Options()
+        options.binary_location = r"CC:\Program Files\Google\Chrome\Application\chrome.exe"  # caminho do seu Chrome
+        servico = Service(ChromeDriverManager().install())
+        navegador = webdriver.Chrome(service=servico, options=options)
 
         # Definir a URL e as credenciais
         url = 'https://www.app-indecx.com/'
@@ -102,10 +103,10 @@ def executar_script():
         with engine.connect() as connection:
             df.to_sql(table_name, con=connection, if_exists='replace', index=False)
 
-        print(f"✅ Dados inseridos com sucesso na tabela '{table_name}'!")
+        print(f"Dados inseridos com sucesso na tabela '{table_name}'!")
 
     except Exception as e:
-        print(f"❌ Erro durante a execução: {e}")
+        print(f" Erro durante a execução: {e}")
 
     finally:
         if 'navegador' in locals():
