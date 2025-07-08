@@ -4,4 +4,3 @@ sqlalchemy
 openpyxl
 pyodbc
 webdriver-manager
-urllib
