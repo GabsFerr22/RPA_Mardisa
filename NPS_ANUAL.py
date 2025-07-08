@@ -15,7 +15,7 @@ def executar_script():
     try:
         # Configurar o serviço do WebDriver manualmente
         options = Options()
-        options.binary_location = r"CC:\Program Files\Google\Chrome\Application\chrome.exe"  # caminho do seu Chrome
+        options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"  # caminho do seu Chrome
         servico = Service(ChromeDriverManager().install())
         navegador = webdriver.Chrome(service=servico, options=options)
 
