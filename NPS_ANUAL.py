@@ -98,3 +98,24 @@ df = pd.DataFrame({
 
 # Exibir o DataFrame
 print(df)
+
+print("Conectando ao banco de dados...")
+user = 'rpa_bi'
+password = 'Rp@_B&_P@rvi'
+host = '10.0.10.243'
+port = '54949'
+database = 'stage'
+
+params = urllib.parse.quote_plus(
+    f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={host},{port};DATABASE={database};UID={user};PWD={password}')
+connection_str = f'mssql+pyodbc:///?odbc_connect={params}'
+engine = create_engine(connection_str)
+table_name = "NPS_Vendas_Anual_IndeCX"
+
+with engine.connect() as connection:
+    df.to_sql(table_name, con=connection, if_exists='replace', index=False)
+
+print(f"Dados inseridos com sucesso na tabela '{table_name}'!")
+
+print("Fechando o navegador...")
+navegador.quit()
