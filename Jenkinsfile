@@ -11,7 +11,7 @@ pipeline {
 
         stage('Instalar dependências') {
             steps {
-                bat '"C:\\Users\\adm.luiz.vinicius\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pip.exe" -m pip install -r requirements.txt'
+                bat '"C:\\Users\\adm.luiz.vinicius\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pip.exe" pip install -r requirements.txt'
             }
         }
 
