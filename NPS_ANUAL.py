@@ -14,9 +14,9 @@ import urllib
 def executar_script():
     try:
         # Configurar o serviço do WebDriver manualmente
-chrome_driver_path = r'C:\Users\adm.luiz.vinicius\Downloads\chromedriver.exe'  
-servico = Service(chrome_driver_path)
-navegador = webdriver.Chrome(service=servico)
+        chrome_driver_path = r'C:\Users\adm.luiz.vinicius\Downloads\chromedriver.exe'
+        servico = Service(chrome_driver_path)
+        navegador = webdriver.Chrome(service=servico)
 
         # Definir a URL e as credenciais
         url = 'https://www.app-indecx.com/'
@@ -60,8 +60,11 @@ navegador = webdriver.Chrome(service=servico)
         print("Processando dados...")
         linhas = texto_extraido.split('\n')
         indices = [1, 7, 13, 19, 26, 32, 38, 44, 50, 56, 63, 70, 77, 84, 91]
-        empresas = ["BOA VISTA", "BRASILIA", "CAMPOS", "FLORIANO", "MANAUS", "NOSSA SENHORA", "TERESINA", "SÃO LUIS", "SÃO GONÇALO", 
-                    "TANGUA", "LUZIANA", "PALMARES", "PETROPOLIS", "URUÇUI", "NACIONAL"]
+        empresas = [
+            "BOA VISTA", "BRASILIA", "CAMPOS", "FLORIANO", "MANAUS", "NOSSA SENHORA",
+            "TERESINA", "SÃO LUIS", "SÃO GONÇALO", "TANGUA", "LUZIANA", "PALMARES",
+            "PETROPOLIS", "URUÇUI", "NACIONAL"
+        ]
 
         notas = []
         for i in range(len(indices)):
@@ -90,7 +93,8 @@ navegador = webdriver.Chrome(service=servico)
         database = 'stage'
 
         params = urllib.parse.quote_plus(
-            f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={host},{port};DATABASE={database};UID={user};PWD={password}')
+            f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={host},{port};DATABASE={database};UID={user};PWD={password}'
+        )
         connection_str = f'mssql+pyodbc:///?odbc_connect={params}'
         engine = create_engine(connection_str)
         table_name = "NPS_Vendas_Anual_IndeCX"
@@ -98,10 +102,10 @@ navegador = webdriver.Chrome(service=servico)
         with engine.connect() as connection:
             df.to_sql(table_name, con=connection, if_exists='replace', index=False)
 
-        print(f"Dados inseridos com sucesso na tabela '{table_name}'!")
+        print(f"✅ Dados inseridos com sucesso na tabela '{table_name}'!")
 
     except Exception as e:
-        print(f"Erro durante a execução: {e}")
+        print(f"❌ Erro durante a execução: {e}")
 
     finally:
         if 'navegador' in locals():
