@@ -13,7 +13,10 @@ import urllib
 
 def executar_script():
     try:
-        navegador = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        # Configurar o serviço do WebDriver manualmente
+chrome_driver_path = r'C:\Users\adm.luiz.vinicius\Downloads\chromedriver.exe'  
+servico = Service(chrome_driver_path)
+navegador = webdriver.Chrome(service=servico)
 
         # Definir a URL e as credenciais
         url = 'https://www.app-indecx.com/'
